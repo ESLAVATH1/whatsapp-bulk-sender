@@ -1,13 +1,15 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 import pandas as pd
 import requests
-import os
 from config import ACCESS_TOKEN, PHONE_NUMBER_ID, API_VERSION
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
 
+# Set upload folder and ensure it exists
 UPLOAD_FOLDER = 'uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # ✅ Ensures 'uploads/' exists
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/", methods=["GET", "POST"])
